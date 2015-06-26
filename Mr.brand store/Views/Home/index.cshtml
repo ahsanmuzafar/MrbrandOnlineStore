@@ -1,0 +1,93 @@
+﻿
+
+
+
+    <!-- Page Content starts from here -->
+
+
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+        <ol class="carousel-indicators">
+
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+
+        </ol>
+
+        <div class="carousel-inner">
+
+            <div class="item active">
+
+                <img class="slide-image" src="/Content/images/Bonanza.jpg" alt="">
+            </div>
+
+            <div class="item">
+
+                <img class="slide-image" src="/Content/images/Panaflex.png" alt="">
+            </div>
+
+            <div class="item">
+
+                <img class="slide-image" src="/Content/images/tshirt.jpg" alt="">
+            </div>
+            <div class="item">
+
+                <img class="slide-image" src="/Content/images/main.png" alt="">
+            </div>
+
+        </div>
+
+        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+
+            <span class="glyphicon glyphicon-chevron-left"></span>
+
+        </a>
+
+        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+
+            <span class="glyphicon glyphicon-chevron-right"></span>
+
+        </a>
+
+    </div>
+
+    <br />
+    <br />
+        @foreach(var x in Model){
+  
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb" )>
+
+                <p style="text-align:center;color:firebrick;font-size:medium; ">@x.name</p>
+               <a class="thumbnail group" rel="g1" href="@Url.Content(x.path)"><img class="img-responsive" src="@Url.Content(x.path)" alt=""/></a>
+                <div class="row">
+                <div class="col-md-6 col-lg-4 col-xs-2" ><p id="boo">@Html.Label("Price   : ",new {@class="control-label"})
+                     @x.price</div>
+                    <div class="col-md-6 col-lg-8 xs-3">@Html.Label("Rating : ",new {@class="control-label"})
+                    @x.rating
+                </div>
+ 
+
+
+                    <form action="/Cart/AddToCart?uid=@Session["Id"]&pid=@x.Id" id="fr" method="post">
+                        <input type="number" value="1" name="quantity" />
+                        <input type="submit" value="Add to Cart" class="btn btn-success"/>
+                    </form>
+                                       @{
+                    var  xyz=Session["name"] as string;
+        if(xyz==null)
+        {
+         <script>
+             $('#fr').remove();
+         </script>    
+     }
+     }
+                     </div>      
+             </div>
+                
+            }
+       
+
+      

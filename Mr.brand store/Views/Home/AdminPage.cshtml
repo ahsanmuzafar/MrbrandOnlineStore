@@ -1,0 +1,15 @@
+﻿<script>
+    $('document').ready(function () {
+        $('#adminnav').append("<li id="+"adminbtn"+ "><a href="+"/Home/AdminPage" +" class="+"btn btn-success"+" >Admin</a></li>")
+
+    });
+
+</script>
+<div class="container">
+        <div class="row">
+            <div class="col-md-12" id="app">
+                @Html.ActionLink("Add New Products", "AddNewProduct", "Admin")
+                @Html.ActionLink("Update or Delete Products", "UpdateProducts", "Admin")
+            </div>
+        </div>
+        </div>

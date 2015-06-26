@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="userModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="userModelStoreContainer">
+    <EntitySet Name="Products" EntityType="userModel.Store.Products" store:Type="Tables" store:Schema="dbo" store:Name="Products">
+      <DefiningQuery>SELECT 
+      [Products].[Id] AS [Id], 
+      [Products].[name] AS [name], 
+      [Products].[path] AS [path], 
+      [Products].[type] AS [type], 
+      [Products].[price] AS [price], 
+      [Products].[rating] AS [rating]
+      FROM [dbo].[Products] AS [Products]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="users" EntityType="userModel.Store.users" store:Type="Tables" store:Schema="dbo" store:Name="users">
+      <DefiningQuery>SELECT 
+      [users].[Id] AS [Id], 
+      [users].[email] AS [email], 
+      [users].[passwd] AS [passwd], 
+      [users].[type] AS [type], 
+      [users].[name] AS [name]
+      FROM [dbo].[users] AS [users]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'C:\USERS\AHSAN_MUZAFAR\DOCUMENTS\VISUAL STUDIO 2012\PROJECTS\MR.BRAND STORE\MR.BRAND STORE\APP_DATA\USER.MDF.dbo.Products' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="name" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="name" Type="nchar" Nullable="false" MaxLength="10" />
+    <Property Name="path" Type="varbinary" Nullable="false" MaxLength="50" />
+    <Property Name="type" Type="varbinary" Nullable="false" MaxLength="15" />
+    <Property Name="price" Type="float" Nullable="false" />
+    <Property Name="rating" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'C:\USERS\AHSAN_MUZAFAR\DOCUMENTS\VISUAL STUDIO 2012\PROJECTS\MR.BRAND STORE\MR.BRAND STORE\APP_DATA\USER.MDF.dbo.users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="name" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="email" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="passwd" Type="varchar" Nullable="false" MaxLength="16" />
+    <Property Name="type" Type="nchar" Nullable="false" MaxLength="50" />
+    <Property Name="name" Type="nchar" Nullable="false" MaxLength="30" />
+  </EntityType>
+</Schema>

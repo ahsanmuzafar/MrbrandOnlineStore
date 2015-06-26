@@ -1,0 +1,44 @@
+﻿@model List < Mr.brand_store.Models.Product>
+@{
+    ViewBag.Title = "UpdateProduct";
+}
+
+<h2>UpdateProduct</h2>
+<table>
+    <tr>
+        <td>
+            Name &nbsp&nbsp&nbsp
+        </td>
+        <td>
+            Price&nbsp&nbsp&nbsp
+        </td>
+        <td>
+            Rating&nbsp&nbsp&nbsp
+        </td>
+        <td>
+            Type&nbsp&nbsp&nbsp
+        </td>
+    </tr>
+    @foreach(var x in Model)
+    {
+        <tr>
+            <td>
+                @x.name   &nbsp&nbsp&nbsp
+                
+            </td>
+            <td>
+                @x.price &nbsp&nbsp&nbsp
+
+            </td>
+            <td>
+                @x.rating &nbsp&nbsp&nbsp
+            </td>
+            <td>
+                @x.type &nbsp&nbsp&nbsp
+            </td>
+            <td><a href="/Admin/Update/@x.Id">   Update&nbsp&nbsp&nbsp   </a></td>
+            <td><a href="/Admin/Delete/@x.Id">   Delete&nbsp&nbsp&nbsp   </a></td> 
+        </tr>
+    }
+</table>
+

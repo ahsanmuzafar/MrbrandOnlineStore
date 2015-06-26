@@ -1,0 +1,53 @@
+﻿@model List<Mr.brand_store.Models.Cart>
+@{
+    ViewBag.Title = "ViewCart";
+}
+<h2>Your Cart</h2>
+
+<table>
+    <tr>
+        <td>
+            Name &nbsp&nbsp&nbsp
+        </td>
+        <td>
+            Price&nbsp&nbsp&nbsp
+        </td>
+      
+        <td>
+            Type&nbsp&nbsp&nbsp
+        </td>
+        <td>
+            Quantity&nbsp&nbsp&nbsp
+        </td>
+    </tr>
+    @{ double total=0;
+    foreach(var x in Model)
+    {
+       <tr>
+            <td>
+                @x.Product.name   &nbsp&nbsp&nbsp
+                
+            </td>
+            <td>
+                @x.Product.price &nbsp&nbsp&nbsp
+                @{total += x.Product.price;}
+            </td>
+            
+            <td>
+                @x.Product.type &nbsp&nbsp&nbsp
+            </td>
+           
+            <td>
+                @x.quantity&nbsp&nbsp&nbsp
+            </td>
+        </tr>
+        }
+        <tr>
+            <td>
+            Total&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp @total
+        </td>
+        </tr>
+        
+    }
+</table>
+<a href="/Cart/checkout" class="btn btn-default">Checkout</a>

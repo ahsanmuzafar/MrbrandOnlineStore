@@ -1,0 +1,73 @@
+﻿@model Mr.brand_store.Models.user
+@{
+    ViewBag.Title = "Register";
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+@section s2{
+<script>
+    $(document).ready(function () {
+        $('#em').on('change',(function () {
+            var x=$('#em').text("fadfadf");
+            $.getJSON("/Home/validEmail?email=" + x, function (data) {
+                if (data == true) {
+                    $('#emdiv').append("<p id='av'>user name not available<P>");
+                }
+                else {
+                    $('#emdiv').append("<p id='av'>user name  available<P>");
+                }
+            });
+
+        }));
+        $('#em').on('click', (function () {
+            $('#av').remove();
+        }));
+    });
+
+</script>
+ }
+    
+
+    <div class="page-header">
+
+        <h1>Register Yourself <small>Mr.Brand User Accounts Form</small></h1>
+
+    </div>
+<div class="Container">
+    <div class="row">
+        <div class="col-md-6 col-lg-6 xs-1">
+@using (Html.BeginForm("RegisterUser", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true)
+               
+                    <div class="form-group">
+                        @Html.Label("Name", new { @class = "col-md-2 col-xs-2 col-sm-2 control-label"  })
+                        <div class="col-md-10 col-xs-10 col-sm-10">
+                            @Html.TextBoxFor(user =>user.name, new {  @class = "form-control" ,name="nam"})
+                        </div>
+                    </div>
+                
+                <div class="form-group " id="emdiv">
+                        @Html.Label("Email", new { @class = "col-md-2 col-xs-2 col-sm-2 control-label" })
+                        <div class="col-md-10 col-xs-10 col-sm-10">
+                            @Html.TextBoxFor(user=>user.email, new { id="em", @class = "form-control",name="em1"})
+                          
+                        </div>
+                    </div>
+                <div class="form-group">
+                        @Html.Label("Password", new { @class = "col-md-2 col-xs-2 col-sm-2 control-label" })
+                        <div class="col-md-10 col-xs-10 col-sm-10">
+                            @Html.TextBoxFor(user =>user.passwd, new { @class = "form-control",name="passwd"  })
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10 col-xs-offset-2 col-xs-10 col-sm-offset-2 col-sm-10">
+                            <input type="submit" class="btn btn-default" value="Sign Up" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>

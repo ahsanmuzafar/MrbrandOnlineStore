@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="userModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="userModelStoreContainer">
+    <EntitySet Name="Products" EntityType="userModel.Store.Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="users" EntityType="userModel.Store.users" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="nchar" Nullable="false" MaxLength="50" />
+    <Property Name="path" Type="nvarchar" Nullable="false" MaxLength="1000" />
+    <Property Name="type" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="price" Type="float" Nullable="false" />
+    <Property Name="rating" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="passwd" Type="varchar" Nullable="false" MaxLength="16" />
+    <Property Name="type" Type="nchar" Nullable="false" MaxLength="50" />
+    <Property Name="name" Type="nchar" Nullable="false" MaxLength="30" />
+  </EntityType>
+</Schema>

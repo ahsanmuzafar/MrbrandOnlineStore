@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="userModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DBcontextclassesss" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Carts" EntityType="userModel.Cart" />
+    <EntitySet Name="Orders" EntityType="userModel.Order" />
+    <EntitySet Name="Products" EntityType="userModel.Product" />
+    <EntitySet Name="users" EntityType="userModel.user" />
+    <AssociationSet Name="f1" Association="userModel.f1">
+      <End Role="users" EntitySet="users" />
+      <End Role="Carts" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Carts_ToProducts" Association="userModel.FK_Carts_ToProducts">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Carts" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_ToProduct" Association="userModel.FK_Orders_ToProduct">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_ToUser" Association="userModel.FK_Orders_ToUser">
+      <End Role="users" EntitySet="users" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="CId" />
+    </Key>
+    <Property Name="CId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Pid" Type="Int32" Nullable="false" />
+    <Property Name="Uid" Type="Int32" Nullable="false" />
+    <Property Name="quantity" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+    <NavigationProperty Name="user" Relationship="userModel.f1" FromRole="Carts" ToRole="users" />
+    <NavigationProperty Name="Product" Relationship="userModel.FK_Carts_ToProducts" FromRole="Carts" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Uid" Type="Int32" Nullable="false" />
+    <Property Name="Pid" Type="Int32" Nullable="false" />
+    <Property Name="quantity" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Product" Relationship="userModel.FK_Orders_ToProduct" FromRole="Orders" ToRole="Products" />
+    <NavigationProperty Name="user" Relationship="userModel.FK_Orders_ToUser" FromRole="Orders" ToRole="users" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="path" Type="String" Nullable="false" MaxLength="1000" Unicode="true" FixedLength="false" />
+    <Property Name="type" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="price" Type="Double" Nullable="false" />
+    <Property Name="rating" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Carts" Relationship="userModel.FK_Carts_ToProducts" FromRole="Products" ToRole="Carts" />
+    <NavigationProperty Name="Orders" Relationship="userModel.FK_Orders_ToProduct" FromRole="Products" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="passwd" Type="String" Nullable="false" MaxLength="16" Unicode="false" FixedLength="false" />
+    <Property Name="type" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="true" />
+    <NavigationProperty Name="Carts" Relationship="userModel.f1" FromRole="users" ToRole="Carts" />
+    <NavigationProperty Name="Orders" Relationship="userModel.FK_Orders_ToUser" FromRole="users" ToRole="Orders" />
+  </EntityType>
+  <Association Name="f1">
+    <End Role="users" Type="userModel.user" Multiplicity="1" />
+    <End Role="Carts" Type="userModel.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Carts">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Carts_ToProducts">
+    <End Role="Products" Type="userModel.Product" Multiplicity="1" />
+    <End Role="Carts" Type="userModel.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Carts">
+        <PropertyRef Name="Pid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_ToProduct">
+    <End Role="Products" Type="userModel.Product" Multiplicity="1" />
+    <End Role="Orders" Type="userModel.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Pid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_ToUser">
+    <End Role="users" Type="userModel.user" Multiplicity="1" />
+    <End Role="Orders" Type="userModel.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

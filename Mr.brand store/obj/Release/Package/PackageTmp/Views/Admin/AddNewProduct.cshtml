@@ -1,0 +1,98 @@
+﻿@model Mr.brand_store.Models.Product
+@{
+    ViewBag.Title = "AddNewProduct";
+}
+<h2>Add new Product</h2>
+           @using (Html.BeginForm("AddNewProduct", "Admin", FormMethod.Post, new { enctype="multipart/form-data", @class = "form-horizontal", role = "form"  } ))
+           {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    
+                    <div class="form-group">
+                            @Html.Label("File", new { @class = "col-md-2 col-xs-2 col-sm-2 control-label" })
+                            <div class="col-md-10 col-xs-10 col-sm-10">
+                                <input type="file" name="nein" value="" />
+                            </div>
+                        </div>
+               
+                    <div class="form-group">
+                        @Html.LabelFor(Model=>Model.name, new { @class = "col-md-2 col-xs-2 col-sm-2 control-label" })
+                        <div class="col-md-10 col-xs-10 col-sm-10">
+                            @Html.TextBoxFor(Model=>Model.name, new { @class = "form-control" })
+                        </div>
+                    </div>
+                <div class="form-group">
+                        @Html.LabelFor(Model=>Model.price, new { @class = "col-md-2 col-xs-2 col-sm-2 control-label" })
+                        <div class="col-md-10 col-xs-10 col-sm-10">
+                            @Html.TextBoxFor(Model => Model.price, new { @class = "form-control" })
+                        </div>
+                    </div>
+                <div class="form-group">
+                        
+                        @Html.LabelFor(Model => Model.type, new { @class = "col-md-2 col-xs-2 col-sm-2 control-label", id = "d1" })
+                        <div class="col-md-10 col-xs-10 col-sm-10">
+                            @Html.DropDownListFor(Model => Model.type, new SelectList(
+                                        new List<object>{
+                                        new { value="Baby", text="Baby"},
+                                        new { value="Jeans", text="Jeans"},
+                                        new { value="TShirt", text="TShirt"},
+                                        new { value="Dress Shirt", text="Dress Shirt"},
+                                        new { value="Dress Pant", text="Dress Pant"},
+                                        
+                                        
+                                        }, "value", "text", 2), new  {@class ="form-control" })
+                           
+                           
+                           @* @Html.TextBoxFor(Model => Model.type, new { @class = "form-control" })*@
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10 col-xs-offset-2 col-xs-10 col-sm-offset-2 col-sm-10">
+                            <input type="submit" class="btn btn-default" value="Add" />
+                        </div>
+                    </div>
+           }
+            
+            
+        
+            @*<form action="/Admin/AddNewProduct" method="post" class = "form-horizontal", role = "form">
+                    <div class="form-group">
+                            <label class = "col-md-2 col-xs-2 col-sm-2 control-label">file</label>
+                        <div class="col-md-10 col-xs-10 col-sm-10">
+                            
+                            <input type="file" name="name" value="@Model.fil" />
+
+                            
+                        </div>
+                        </div>
+                    <div class="form-group">
+                            <label class = "col-md-2 col-xs-2 col-sm-2 control-label">Name</label>
+                        <div class="col-md-10 col-xs-10 col-sm-10">
+                            
+                               <input type="text" name="name" value="@Model.p.name" />
+
+                            
+                        </div>
+                        </div>
+    <div class="form-group">
+                            <label class = "col-md-2 col-xs-2 col-sm-2 control-label">Type</label>
+                        <div class="col-md-10 col-xs-10 col-sm-10">
+                            
+                            <input type="text" name="name" value="@Model.p.type" />
+
+                            
+                        </div>
+                        </div>
+
+    <div class="form-group">
+                            <label class = "col-md-2 col-xs-2 col-sm-2 control-label">Price</label>
+                        <div class="col-md-10 col-xs-10 col-sm-10">
+                            
+                            <input type="text" name="name" value="@Model.p.price" />
+
+                            
+                        </div>
+                        </div>
+
+</form>*@

@@ -1,0 +1,14 @@
+﻿@model Mr.brand_store.Models.Product
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+<div class="container">
+    <div class="Page-Header">
+        <p>Are your your delete product @Model.name</p>
+        <form action="/Admin/DeleteConf/@Model.Id" method="post">
+            <input type="submit" value="Delete" />
+        </form>  Delete&nbsp&nbsp&nbsp   
+    </div>
+</div>
